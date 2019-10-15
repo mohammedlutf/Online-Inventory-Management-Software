@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block title %}Order{% endblock %}
+{% block body %}
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">manage Order</th>
+      <th scope="col">Add product</th>
+      <th scope="col">Make Order</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+    <tr>
+      <th scope="row">{{user.username}}</th>
+      <td>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="customCheck{{user.id}}" name="example1">
+          <label class="custom-control-label" for="customCheck{{user.id}}">Check</label>
+       </div>
+     </td>
+      <td>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck{{user.id}}" name="example1">
+            <label class="custom-control-label" for="customCheck{{user.id}}">Check</label>
+      </div>
+   </td>
+      <td>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="customCheck{{user.id}}" name="example1">
+            <label class="custom-control-label" for="customCheck{{user.id}}">Check</label>
+        </div>
+   </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+{% endblock %}

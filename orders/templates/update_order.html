@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block title %}Order{% endblock %}
+{% block body %}
+<h3 align="center">Add Remove Select Box Fields Dynamically using jQuery Ajax in PHP</h3>
+<br />
+<h4 align="center">Enter Item Details</h4>
+<br />
+<form method="post" action="">
+ <div class="table-repsonsive">
+  <span id="error"></span>
+  <table class="table table-bordered" id="item_table">
+   <tr>
+    <th>Enter Item barcode</th>
+    <th>Enter Quantity</th>
+    <th>Product name</th>
+    <th>Price</th>
+    <th>Total</th>
+    <th><button type="button" name="add" class="btn btn-success btn-sm add" onclick="addrow()"><i class="fas fa-plus"></i></button></th>
+   </tr>
+   <tbody>
+     {% for order in order %}
+     <tr>
+     <td><input type="text" name="item_bar[]" class="form-control item_bar" id="item_{{loop.index}}" onkeydown="getProduct(event,{{loop.index}});" value="{{order.barcode}}"/></td>
+     <td><input type="text" name="item_quantity[]" class="form-control item_quantity" id="qty_{{loop.index}}" onkeyup="getTotal({{loop.index}})"value="{{order.quantity}}"/></td>
+     <td><input type="text" name="item_name[]" class="form-control item_name" id="name_{{loop.index}}" readonly value="{{order.name}}"/></td>
+     <td><input type="text" name="price[]" class="form-control item_price" id="price_{{loop.index}}" readonly value="{{order.price}}"/></td>
+     <td><input type="text" name="total[]" class="form-control item_total" id="total_{{loop.index}}"  readonly value="{{order.total}}"/></td>
+     <td><button type="button" name="remove" class="btn btn-danger btn-sm remove" ><i class="fas fa-minus"></i></button></td>
+   </tr>
+   {% endfor %}
+   </tbody>
+
+  </table>
+  <br><br>
+  <div class="col-md-6 ">
+  <div class="form-group">
+      <label for="gross_amount" class="col-sm-5 control-label">Gross Amount</label>
+      <div class="col-sm-7 ">
+        <input type="text" class="form-control" id="total_amount" name="total_amount" readonly value="{{order_amount.total_amount}}"/>
+
+      </div>
+    </div>
+
+    </div>
+
+<br><br><br>
+  <br>
+  <div align="center">
+   <input type="submit" class="btn btn-info" value="update" />
+  </div>
+ </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  </head>
+  <body>
+    <h1>Invoice</h1>
+    <h6>invoice No. {{order.id}}</h6>
+    <h6>Date : {{order.date_creation}}</h6>
+    <table  class="table table-striped">
+      <thead>
+
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Total</th>
+        </tr>
+
+      </thead>
+      <tbody>
+        {% for i in order.orders %}
+        <tr>
+      <td>{{i.name}}</td>
+          <td>{{i.quantity}}</td>
+          <td>{{i.price}}</td>
+          <td>{{i.total}}</td>
+      </tr>
+        {% endfor %}
+       </tbody>
+    </table>
+    <h1>Total Amount :</h1>
+
+<button type="button" class="btn btn-success" name="button">{{order.total_amount}}</button>
+
+
+  </body>
+</html>

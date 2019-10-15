@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block title %}Products{% endblock %}
+{% block body %}
+
+<table class="table table-striped" id="dataTable">
+  <thead>
+
+    <tr>
+      <th scope="col">Bill No.</th>
+      <th scope="col">Total Amount</th>
+      <th scope="col">Date</th>
+      <th scope="col">Action</th>
+    </tr>
+
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <th>{{order.id}}</th>
+      <td>{{order.total_amount}}</td>
+      <td>{{order.date_creation}}</td>
+      <td>
+         <a href="/printInvoice/{{order.id}}"><button type="button" class="btn btn-success btn-circle btn-sm"><i class="fas fa-print"></i></button></a>
+         <a href="/order/update/{{order.id}}"><button type="button" class="btn btn-primary btn-circle btn-sm"> <i class="far fa-edit"></i></button></a>
+         <a  data-toggle="modal" data-target="#deleteModal{{order.id}}"><button type="button" class="btn btn-danger btn-circle btn-sm"> <i class="far fa-trash-alt"></i></button></a>
+      </td>
+    </tr>
+   <!-- delete model -->
+    <div class="modal fade" id="deleteModal{{order.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete Product?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action="{{ url_for('delete_order', order_id=order.id) }}" method="POST">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+{% endblock %}

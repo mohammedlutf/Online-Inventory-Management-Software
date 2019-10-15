@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block title %}Products{% endblock %}
+{% block body %}
+
+<form  action=" " method="POST">
+<div class="form-group">
+       <label for="exampleInput">Name of product</label>
+       <input type="text" class="form-control" name="name" id="exampleInput" value={{product.name}}>
+   </div>
+
+   <div class="form-group">
+        <label for="exampleInput1">Barcode of product</label>
+        <input type="text" class="form-control" name="barcode" id="exampleInput1" value={{product.barcode}}>
+    </div>
+
+    <div class="form-group">
+         <label for="exampleInput2">Quantity of product</label>
+         <input type="text" class="form-control" name="quantity" id="exampleInput2" value={{product.quantity}}>
+     </div>
+
+     <div class="form-group">
+          <label for="exampleInput3">Price of product</label>
+          <input type="text" class="form-control" name="price" id="exampleInput3" value={{product.price}}>
+      </div>
+<div class="">
+  <button type="submit" class="btn btn-success">Update</button>
+</div>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+{% block title %}Products{% endblock %}
+{% block body %}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Add product
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add new product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+      <form  action=" " method="POST">
+
+
+        <div class="form-group">
+             <label for="exampleInput">Name of product</label>
+             <input type="text" class="form-control" name="name" id="exampleInput" placeholder="Name of product">
+         </div>
+
+         <div class="form-group">
+              <label for="exampleInput1">Barcode of product</label>
+              <input type="text" class="form-control" name="barcode" id="exampleInput1" placeholder="Barcode of product">
+          </div>
+
+          <div class="form-group">
+               <label for="exampleInput2">Quantity of product</label>
+               <input type="text" class="form-control" name="quantity" id="exampleInput2" placeholder="Quantity of product">
+           </div>
+
+           <div class="form-group">
+                <label for="exampleInput3">Price of product</label>
+                <input type="text" class="form-control" name="price" id="exampleInput3" placeholder="Price of product">
+            </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<table class="table table-striped" id="dataTable">
+  <thead>
+
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Barcode</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Action</th>
+    </tr>
+
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <th>{{product.name}}</th>
+      <td>{{product.barcode}}</td>
+      <td>{{product.quantity}}</td>
+      <td>{{product.price}}</td>
+      <td> <a href="/product/update/{{product.id}}"><button type="button" class="btn btn-primary btn-circle btn-sm"> <i class="far fa-edit"></i></button></a>
+         <a  data-toggle="modal" data-target="#deleteModal{{product.id}}"><button type="button" class="btn btn-danger btn-circle btn-sm"> <i class="far fa-trash-alt"></i></button></a>
+      </td>
+    </tr>
+   <!-- delete model -->
+    <div class="modal fade" id="deleteModal{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete Product?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+{% endblock %}
